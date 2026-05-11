@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>四年級英語陪讀 | 數位學伴</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>📚 四年級英語陪讀</h1>
+    <div class="subtitle">數位學伴 × 大學伴陪讀工具・依教育部課綱自製教材</div>
+  </header>
+
+  <div class="container">
+    <div class="unit-grid" id="unit-grid"></div>
+  </div>
+
+  <script src="data/units.js"></script>
+  <script>
+    const grid = document.getElementById("unit-grid");
+    UNITS.forEach(u => {
+      const a = document.createElement("a");
+      a.href = `unit.html?id=${u.id}`;
+      a.className = "unit-card";
+      a.innerHTML = `
+        <span class="emoji">${u.emoji}</span>
+        <div class="unit-number">Unit ${u.id}</div>
+        <div class="unit-title">${u.title}</div>
+        <div class="unit-title-zh">${u.titleZh}</div>
+      `;
+      grid.appendChild(a);
+    });
+  </script>
+</body>
+</html>

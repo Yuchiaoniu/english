@@ -1,0 +1,542 @@
+:root {
+  --primary: #4a90e2;
+  --primary-dark: #2c6bb8;
+  --secondary: #f5a623;
+  --success: #7ed321;
+  --error: #e74c3c;
+  --bg: #fdf8f3;
+  --card-bg: #ffffff;
+  --text: #2c3e50;
+  --text-light: #7f8c8d;
+  --border: #e1e8ed;
+  --role-a: #4a90e2;
+  --role-a-bg: #e8f2fc;
+  --role-b: #f5a623;
+  --role-b-bg: #fdf2e0;
+  --tutor: #9b59b6;
+  --tutor-bg: #f4ecf7;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Noto Sans TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 24px 32px;
+  box-shadow: var(--shadow);
+}
+
+header h1 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+header .subtitle {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+/* Unit Grid (Home Page) */
+.unit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.unit-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: var(--text);
+  border: 2px solid transparent;
+}
+
+.unit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
+}
+
+.unit-card .emoji {
+  font-size: 56px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.unit-card .unit-number {
+  font-size: 13px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.unit-card .unit-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 4px 0;
+}
+
+.unit-card .unit-title-zh {
+  font-size: 15px;
+  color: var(--text-light);
+}
+
+/* Unit Page */
+.unit-header {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.unit-header .info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.unit-header .emoji {
+  font-size: 48px;
+}
+
+.unit-header h2 {
+  font-size: 24px;
+}
+
+.unit-header .unit-title-zh {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.back-btn {
+  background: var(--border);
+  color: var(--text);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.back-btn:hover { background: #d1dae0; }
+
+.tutor-toggle {
+  background: var(--tutor);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.tutor-toggle:hover { background: #8e44ad; }
+.tutor-toggle.active { background: #6c3483; }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 100px;
+  background: var(--card-bg);
+  border: 2px solid transparent;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-light);
+  box-shadow: var(--shadow);
+}
+
+.tab-btn:hover { color: var(--primary); }
+.tab-btn.active { color: var(--primary); border-color: var(--primary); background: white; }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Cards (general) */
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+/* Vocabulary Card */
+.vocab-card {
+  background: white;
+  border-radius: 20px;
+  padding: 48px 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.vocab-card .emoji { font-size: 96px; margin-bottom: 16px; }
+.vocab-card .word { font-size: 48px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+.vocab-card .zh { font-size: 24px; color: var(--text); }
+.vocab-card .zhuyin { font-size: 16px; color: var(--text-light); font-family: "Microsoft JhengHei", sans-serif; margin-top: 4px; }
+
+.vocab-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  gap: 12px;
+}
+
+.nav-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.nav-btn:hover { background: var(--primary-dark); }
+.nav-btn:disabled { background: var(--border); color: var(--text-light); cursor: not-allowed; }
+
+.progress-label {
+  font-size: 14px;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+details.vocab-list { margin-top: 16px; }
+details.vocab-list summary {
+  cursor: pointer;
+  padding: 12px;
+  background: var(--card-bg);
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--primary);
+  list-style: none;
+}
+details.vocab-list summary::before { content: "▶ "; font-size: 12px; }
+details.vocab-list[open] summary::before { content: "▼ "; }
+
+.vocab-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+.vocab-row:last-child { border-bottom: none; }
+.vocab-row .e { font-size: 24px; text-align: center; }
+.vocab-row .w { font-weight: 700; color: var(--primary); }
+
+/* Sentence Patterns */
+.pattern-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.pattern-card .structure {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.pattern-card .structure u { color: var(--secondary); text-decoration-thickness: 3px; }
+
+.pattern-card .zh { color: var(--text-light); margin-bottom: 12px; }
+
+.pattern-card details summary {
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 600;
+  padding: 8px 0;
+  list-style: none;
+}
+.pattern-card details summary::before { content: "▶ "; font-size: 12px; }
+.pattern-card details[open] summary::before { content: "▼ "; }
+
+.example {
+  background: var(--bg);
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  border-left: 3px solid var(--primary);
+}
+.example .en { font-weight: 600; }
+.example .zh-line { color: var(--text-light); font-size: 14px; }
+
+.practice-btn {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+.practice-btn:hover { background: #d68910; }
+
+.practice-box {
+  margin-top: 12px;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: 8px;
+}
+.practice-sentence {
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.practice-sentence .blank {
+  display: inline-block;
+  min-width: 100px;
+  border-bottom: 2px solid var(--text);
+  padding: 0 8px;
+  margin: 0 4px;
+}
+.practice-sentence .blank.filled { color: var(--success); border-color: var(--success); }
+.practice-options { display: flex; gap: 8px; flex-wrap: wrap; }
+.option-btn {
+  background: white;
+  border: 2px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.option-btn:hover { border-color: var(--primary); }
+.option-btn.correct { background: #d4edda; border-color: var(--success); color: #155724; }
+.option-btn.wrong { background: #f8d7da; border-color: var(--error); color: #721c24; }
+.feedback { margin-top: 8px; font-weight: 600; }
+.feedback.ok { color: var(--success); }
+.feedback.err { color: var(--error); }
+
+/* Dialogue */
+.dialogue-line {
+  display: flex;
+  margin-bottom: 12px;
+}
+.dialogue-line.role-a { justify-content: flex-start; }
+.dialogue-line.role-b { justify-content: flex-end; }
+
+.bubble {
+  max-width: 75%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+.role-a .bubble { background: var(--role-a-bg); border-left: 4px solid var(--role-a); }
+.role-b .bubble { background: var(--role-b-bg); border-right: 4px solid var(--role-b); }
+
+.bubble .speaker { font-size: 12px; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+.role-a .bubble .speaker { color: var(--role-a); }
+.role-b .bubble .speaker { color: var(--role-b); }
+
+.bubble .en { font-weight: 600; }
+.bubble .zh-line { color: var(--text-light); font-size: 14px; margin-top: 4px; }
+
+.bubble .keyword {
+  border-bottom: 2px dashed var(--secondary);
+  cursor: help;
+  position: relative;
+}
+.bubble .keyword:hover::after {
+  content: attr(data-zh);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  margin-bottom: 4px;
+}
+
+.dialogue-line.active .bubble {
+  outline: 3px solid var(--secondary);
+  outline-offset: 4px;
+}
+
+.dialogue-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+/* Quiz */
+.quiz-question {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-option {
+  background: white;
+  border: 2px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: left;
+}
+.quiz-option:hover { border-color: var(--primary); }
+.quiz-option.selected { border-color: var(--primary); background: #e8f2fc; }
+.quiz-option.correct { background: #d4edda; border-color: var(--success); }
+.quiz-option.wrong { background: #f8d7da; border-color: var(--error); }
+
+.quiz-progress { color: var(--text-light); font-weight: 600; margin-bottom: 12px; }
+
+.quiz-result { text-align: center; padding: 24px; }
+.quiz-result .score { font-size: 64px; font-weight: 800; color: var(--primary); }
+.quiz-result .score-label { color: var(--text-light); }
+
+.review-item { padding: 12px; border-bottom: 1px solid var(--border); }
+.review-item:last-child { border: none; }
+.review-q { font-weight: 600; margin-bottom: 4px; }
+.review-correct { color: var(--success); font-weight: 600; }
+.review-wrong { color: var(--error); font-weight: 600; }
+
+/* Tutor Panel */
+.tutor-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 380px;
+  max-width: 90vw;
+  height: 100vh;
+  background: var(--card-bg);
+  box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+  padding: 24px;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 100;
+  border-left: 4px solid var(--tutor);
+}
+.tutor-panel.open { transform: translateX(0); }
+
+.tutor-panel h3 {
+  color: var(--tutor);
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.tutor-section { margin-bottom: 20px; }
+.tutor-section h4 {
+  color: var(--text);
+  font-size: 15px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--tutor-bg);
+}
+.tutor-section ul { padding-left: 20px; }
+.tutor-section li { margin-bottom: 6px; font-size: 14px; line-height: 1.6; }
+
+.tutor-section.prompts li {
+  background: var(--tutor-bg);
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  list-style: none;
+  margin-left: -20px;
+}
+
+.tutor-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-light);
+}
+
+.show-answers-btn {
+  background: var(--tutor);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+.show-answers-btn:hover { background: #8e44ad; }
+.answers-list { margin-top: 12px; }
+.answers-list li {
+  background: var(--bg);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  list-style: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { padding: 16px; }
+  .unit-grid { grid-template-columns: 1fr; }
+  header { padding: 16px 20px; }
+  header h1 { font-size: 22px; }
+  .vocab-card { padding: 32px 16px; min-height: 260px; }
+  .vocab-card .emoji { font-size: 72px; }
+  .vocab-card .word { font-size: 36px; }
+  .tabs { gap: 4px; }
+  .tab-btn { padding: 10px 12px; font-size: 14px; min-width: 0; }
+  .vocab-row { grid-template-columns: 40px 1fr 1fr; }
+  .vocab-row .zhuyin { display: none; }
+  .tutor-panel { width: 100vw; }
+}

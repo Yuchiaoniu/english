@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>單元學習 | 四年級英語陪讀</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>📚 四年級英語陪讀</h1>
+    <div class="subtitle" id="unit-subtitle">載入中...</div>
+  </header>
+
+  <div class="container">
+    <div class="unit-header">
+      <div class="info">
+        <span class="emoji" id="u-emoji"></span>
+        <div>
+          <h2 id="u-title"></h2>
+          <div class="unit-title-zh" id="u-title-zh"></div>
+        </div>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <a href="index.html" class="back-btn">← 回首頁</a>
+        <button class="tutor-toggle" id="tutor-toggle">大學伴模式 🎓</button>
+      </div>
+    </div>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="vocab">單字 🔤</button>
+      <button class="tab-btn" data-tab="patterns">句型 💬</button>
+      <button class="tab-btn" data-tab="dialogue">對話 🗣️</button>
+      <button class="tab-btn" data-tab="quiz">測驗 ✏️</button>
+    </nav>
+
+    <main>
+      <section id="vocab" class="tab-content active"></section>
+      <section id="patterns" class="tab-content"></section>
+      <section id="dialogue" class="tab-content"></section>
+      <section id="quiz" class="tab-content"></section>
+    </main>
+  </div>
+
+  <aside class="tutor-panel" id="tutor-panel">
+    <button class="tutor-close" id="tutor-close">×</button>
+    <h3>🎓 大學伴提示</h3>
+    <div id="tutor-content"></div>
+  </aside>
+
+  <script src="data/units.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const unitId = parseInt(params.get("id") || "1");
+    const dataScript = document.createElement("script");
+    dataScript.src = `data/unit${unitId}.js`;
+    dataScript.onload = () => initUnit();
+    dataScript.onerror = () => {
+      document.querySelector("main").innerHTML = "<div class='card'>找不到單元資料，請回首頁。</div>";
+    };
+    document.head.appendChild(dataScript);
+  </script>
+  <script src="unit.js"></script>
+</body>
+</html>
