@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Unit 9 — How Do You Feel? 單課完整簡報產生器。
 9 個情緒/感受單字 + 連連看 + 句型填空 + 會話，共 15 頁。
+主色：黃色系（per 專案 CLAUDE.md，避免粉紅）。
 輸出：Unit9_How_Do_You_Feel.pptx
 """
 from pptx import Presentation
@@ -9,17 +10,17 @@ from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
 
-# ---------- 主題色（rose 玫瑰紅，搭情緒主題）----------
-THEME   = RGBColor(0xE0, 0x4A, 0x6B)
-THEME_D = RGBColor(0xB0, 0x35, 0x52)
-WHITE   = RGBColor(0xFF, 0xFF, 0xFF)
-DARK    = RGBColor(0x2C, 0x3E, 0x50)
-GRAY    = RGBColor(0x7F, 0x8C, 0x8D)
-LIGHT   = RGBColor(0xFB, 0xF4, 0xF6)
-A_BLUE  = RGBColor(0x4A, 0x90, 0xD9)
-B_ORNG  = RGBColor(0xF0, 0x8A, 0x24)
-GREEN   = RGBColor(0x27, 0xAE, 0x60)
-CARD_BD = RGBColor(0xEA, 0xD4, 0xDB)
+# ---------- 主題色（warm yellow，per 專案規範避免粉紅）----------
+THEME    = RGBColor(0xFF, 0xC1, 0x07)  # 主黃 amber 500
+THEME_D  = RGBColor(0xB0, 0x73, 0x09)  # 深琥珀（白底點綴、深底背景）
+WHITE    = RGBColor(0xFF, 0xFF, 0xFF)
+DARK     = RGBColor(0x2C, 0x3E, 0x50)  # navy slate（黃底文字色）
+GRAY     = RGBColor(0x7F, 0x8C, 0x8D)
+LIGHT    = RGBColor(0xFF, 0xFA, 0xE5)  # 米色背景
+A_BLUE   = RGBColor(0x4A, 0x90, 0xD9)
+B_ORNG   = RGBColor(0xF0, 0x8A, 0x24)
+GREEN    = RGBColor(0x27, 0xAE, 0x60)
+CARD_BD  = RGBColor(0xF1, 0xDA, 0x9B)  # 暖棕邊
 
 W = Inches(13.333)
 H = Inches(7.5)
@@ -27,7 +28,7 @@ H = Inches(7.5)
 UNIT_NO    = 9
 UNIT_EN    = "How Do You Feel?"
 UNIT_ZH    = "你感覺怎麼樣？"
-UNIT_EMOJI = "💖"
+UNIT_EMOJI = "💛"   # 黃色心，呼應主色
 
 VOCAB = [
     {"word": "happy",     "zh": "快樂",   "zhuyin": "ㄎㄨㄞˋ ㄌㄜˋ",      "emoji": "😄"},
@@ -58,7 +59,7 @@ MATCH1_RIGHT = [
 ]
 MATCH1_ANS = "A–2  ·  B–5  ·  C–4  ·  D–3  ·  E–1"
 
-# ---------- 連連看二：情境 ↔ 情緒詞 ----------
+# ---------- 連連看二:情境 ↔ 情緒詞 ----------
 MATCH2_LEFT = [
     ("A", "I got 100 in the test!"),
     ("B", "Surprise! Happy birthday!"),
@@ -172,7 +173,7 @@ def topbar(slide, label):
     r.text = "   Unit %d · %s   %s   %s" % (UNIT_NO, UNIT_EN, UNIT_EMOJI, label)
     r.font.size = Pt(17)
     r.font.bold = True
-    r.font.color.rgb = WHITE
+    r.font.color.rgb = DARK  # 黃底用深 navy
 
 
 def heading(slide, text):
@@ -196,15 +197,15 @@ def s_cover(prs):
     deco2.line.fill.background()
 
     textbox(s, Inches(0.8), Inches(1.4), Inches(11.7), Inches(1.7),
-            [(UNIT_EMOJI, 96, False, WHITE, PP_ALIGN.CENTER)])
+            [(UNIT_EMOJI, 96, False, DARK, PP_ALIGN.CENTER)])
     textbox(s, Inches(0.8), Inches(3.05), Inches(11.7), Inches(1.2),
-            [("Unit %d · %s" % (UNIT_NO, UNIT_EN), 48, True, WHITE, PP_ALIGN.CENTER)])
+            [("Unit %d · %s" % (UNIT_NO, UNIT_EN), 48, True, DARK, PP_ALIGN.CENTER)])
     textbox(s, Inches(0.8), Inches(4.25), Inches(11.7), Inches(0.9),
-            [(UNIT_ZH, 40, True, WHITE, PP_ALIGN.CENTER)])
+            [(UNIT_ZH, 40, True, DARK, PP_ALIGN.CENTER)])
     textbox(s, Inches(0.8), Inches(5.45), Inches(11.7), Inches(0.7),
-            [("四年級英語 · 單字 9 · 連連看 · 句型填空 · 會話", 22, False, WHITE, PP_ALIGN.CENTER)])
+            [("四年級英語 · 單字 9 · 連連看 · 句型填空 · 會話", 22, False, DARK, PP_ALIGN.CENTER)])
     textbox(s, Inches(0.8), Inches(6.35), Inches(11.7), Inches(0.55),
-            [("🌐  https://Yuchiaoniu.github.io/english/", 18, False, WHITE, PP_ALIGN.CENTER)])
+            [("🌐  https://Yuchiaoniu.github.io/english/", 18, False, DARK, PP_ALIGN.CENTER)])
 
 
 def s_vocab_overview(prs):
@@ -230,7 +231,7 @@ def s_vocab_overview(prs):
         r1.font.size = Pt(24); r1.font.bold = True; r1.font.color.rgb = DARK
         p2 = tf.add_paragraph(); p2.alignment = PP_ALIGN.CENTER
         r2 = p2.add_run(); r2.text = v["zh"]
-        r2.font.size = Pt(20); r2.font.color.rgb = THEME
+        r2.font.size = Pt(20); r2.font.color.rgb = THEME_D  # 鮮黃在白底看不到，改用深琥珀
 
 
 def s_vocab_cards(prs, items, label, title):
@@ -248,7 +249,7 @@ def s_vocab_cards(prs, items, label, title):
     for i, v in enumerate(items):
         x = Inches(sx_in + i * (cw_in + gap))
         card = rrect(s, x, sy, Inches(cw_in), Inches(ch_in),
-                     WHITE, line=THEME, line_w=1.75)
+                     WHITE, line=THEME_D, line_w=1.75)
         tf = card.text_frame
         tf.vertical_anchor = MSO_ANCHOR.MIDDLE
         tf.word_wrap = True
@@ -273,9 +274,9 @@ def s_section(prs, emoji, en, zh):
     band.fill.solid(); band.fill.fore_color.rgb = THEME_D
     band.line.fill.background()
     textbox(s, Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.4),
-            [(emoji, 80, False, WHITE, PP_ALIGN.CENTER)])
+            [(emoji, 80, False, DARK, PP_ALIGN.CENTER)])  # 黃底用深字
     textbox(s, Inches(0.8), Inches(2.75), Inches(11.7), Inches(1.1),
-            [(en, 48, True, WHITE, PP_ALIGN.CENTER)])
+            [(en, 48, True, WHITE, PP_ALIGN.CENTER)])      # 深琥珀 band 上白字
     textbox(s, Inches(0.8), Inches(3.9), Inches(11.7), Inches(0.9),
             [(zh, 32, False, WHITE, PP_ALIGN.CENTER)])
 
@@ -298,25 +299,25 @@ def s_match(prs, label, title, instr, left, right):
     for i, (lbl, txt) in enumerate(left):
         y = start_y + i * (row_h + gap)
         card = rrect(s, left_x, Inches(y), col_w, Inches(row_h),
-                     WHITE, line=THEME, line_w=1.5)
+                     WHITE, line=THEME_D, line_w=1.5)
         tf = card.text_frame
         tf.vertical_anchor = MSO_ANCHOR.MIDDLE
         tf.word_wrap = True
         p = tf.paragraphs[0]; p.alignment = PP_ALIGN.LEFT
         r1 = p.add_run(); r1.text = "  " + lbl + ".   "
-        r1.font.size = Pt(22); r1.font.bold = True; r1.font.color.rgb = THEME
+        r1.font.size = Pt(22); r1.font.bold = True; r1.font.color.rgb = THEME_D
         r2 = p.add_run(); r2.text = txt
         r2.font.size = Pt(22); r2.font.bold = True; r2.font.color.rgb = DARK
     for i, (lbl, txt) in enumerate(right):
         y = start_y + i * (row_h + gap)
         card = rrect(s, right_x, Inches(y), col_w, Inches(row_h),
-                     WHITE, line=THEME, line_w=1.5)
+                     WHITE, line=THEME_D, line_w=1.5)
         tf = card.text_frame
         tf.vertical_anchor = MSO_ANCHOR.MIDDLE
         tf.word_wrap = True
         p = tf.paragraphs[0]; p.alignment = PP_ALIGN.LEFT
         r1 = p.add_run(); r1.text = "  " + lbl + ".   "
-        r1.font.size = Pt(22); r1.font.bold = True; r1.font.color.rgb = THEME
+        r1.font.size = Pt(22); r1.font.bold = True; r1.font.color.rgb = THEME_D
         r2 = p.add_run(); r2.text = txt
         r2.font.size = Pt(22); r2.font.bold = True; r2.font.color.rgb = DARK
 
@@ -334,7 +335,7 @@ def s_pattern_fill(prs, idx, p):
     tf1.word_wrap = True
     pp1 = tf1.paragraphs[0]; pp1.alignment = PP_ALIGN.CENTER
     rr1 = pp1.add_run(); rr1.text = p["structure"]
-    rr1.font.size = Pt(26); rr1.font.bold = True; rr1.font.color.rgb = WHITE
+    rr1.font.size = Pt(26); rr1.font.bold = True; rr1.font.color.rgb = DARK  # 黃底深字
     # 中文
     textbox(s, Inches(0.7), Inches(2.65), Inches(11.93), Inches(0.45),
             [(p["zh"], 20, True, DARK, PP_ALIGN.CENTER)])
@@ -369,7 +370,7 @@ def s_pattern_fill(prs, idx, p):
         tfq.word_wrap = True
         pq = tfq.paragraphs[0]; pq.alignment = PP_ALIGN.LEFT
         rq = pq.add_run(); rq.text = "  %d.  %s" % (j + 1, item["q"])
-        rq.font.size = Pt(17); rq.font.bold = True; rq.font.color.rgb = WHITE
+        rq.font.size = Pt(17); rq.font.bold = True; rq.font.color.rgb = DARK  # 黃底深字
         # 三選項橫排
         oy = fy + 0.55
         opt_gap = 0.1
@@ -456,15 +457,15 @@ def s_closing(prs):
     s = slide_blank(prs)
     set_bg(s, THEME)
     textbox(s, Inches(0.8), Inches(2.2), Inches(11.7), Inches(1.6),
-            [("🎉", 90, False, WHITE, PP_ALIGN.CENTER)])
+            [("🎉", 90, False, DARK, PP_ALIGN.CENTER)])
     textbox(s, Inches(0.8), Inches(3.8), Inches(11.7), Inches(1.1),
-            [("Great Job!  你做得很棒！", 46, True, WHITE, PP_ALIGN.CENTER)])
+            [("Great Job!  你做得很棒！", 46, True, DARK, PP_ALIGN.CENTER)])
     textbox(s, Inches(0.8), Inches(4.95), Inches(11.7), Inches(0.8),
             [("Unit %d · %s  %s" % (UNIT_NO, UNIT_EN, UNIT_ZH),
-              22, False, WHITE, PP_ALIGN.CENTER)])
+              22, False, DARK, PP_ALIGN.CENTER)])
     textbox(s, Inches(0.8), Inches(5.85), Inches(11.7), Inches(0.7),
             [("🌐 線上互動版　https://Yuchiaoniu.github.io/english/",
-              20, False, WHITE, PP_ALIGN.CENTER)])
+              20, False, DARK, PP_ALIGN.CENTER)])
 
 
 def main():
@@ -472,27 +473,27 @@ def main():
     prs.slide_width = W
     prs.slide_height = H
 
-    s_cover(prs)                                                                # 1
-    s_vocab_overview(prs)                                                       # 2
-    s_vocab_cards(prs, VOCAB[0:3], "Vocabulary 1/3", "情緒詞（一）")           # 3
-    s_vocab_cards(prs, VOCAB[3:6], "Vocabulary 2/3", "情緒詞（二）")           # 4
-    s_vocab_cards(prs, VOCAB[6:9], "Vocabulary 3/3", "情緒詞（三）")           # 5
-    s_section(prs, "🎯", "Matching Game", "連連看")                            # 6
+    s_cover(prs)
+    s_vocab_overview(prs)
+    s_vocab_cards(prs, VOCAB[0:3], "Vocabulary 1/3", "情緒詞（一）")
+    s_vocab_cards(prs, VOCAB[3:6], "Vocabulary 2/3", "情緒詞（二）")
+    s_vocab_cards(prs, VOCAB[6:9], "Vocabulary 3/3", "情緒詞（三）")
+    s_section(prs, "🎯", "Matching Game", "連連看")
     s_match(prs, "Matching 1 連連看（一）",
             "連連看（一）：單字 ↔ 中文",
             "請將左邊英文單字與右邊中文意義配對。",
-            MATCH1_LEFT, MATCH1_RIGHT)                                          # 7
+            MATCH1_LEFT, MATCH1_RIGHT)
     s_match(prs, "Matching 2 連連看（二）",
             "連連看（二）：情境 ↔ 情緒",
             "請看左邊情境句，從右邊找出對應的情緒詞。",
-            MATCH2_LEFT, MATCH2_RIGHT)                                          # 8
-    s_section(prs, "📝", "Pattern & Fill-in", "句型填空")                      # 9
-    s_pattern_fill(prs, 1, PATTERN1)                                            # 10
-    s_pattern_fill(prs, 2, PATTERN2)                                            # 11
-    s_section(prs, "💬", "Dialogue", "會話")                                   # 12
-    s_dialogue(prs)                                                             # 13
-    s_answers(prs)                                                              # 14
-    s_closing(prs)                                                              # 15
+            MATCH2_LEFT, MATCH2_RIGHT)
+    s_section(prs, "📝", "Pattern & Fill-in", "句型填空")
+    s_pattern_fill(prs, 1, PATTERN1)
+    s_pattern_fill(prs, 2, PATTERN2)
+    s_section(prs, "💬", "Dialogue", "會話")
+    s_dialogue(prs)
+    s_answers(prs)
+    s_closing(prs)
 
     out = r"C:\Users\yuchi\grade4-english-tutor\Unit9_How_Do_You_Feel.pptx"
     prs.save(out)
